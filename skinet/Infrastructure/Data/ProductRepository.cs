@@ -37,22 +37,28 @@ public class ProductRepository(StoreContext context) : IProductRepository //Prim
     public async Task<IReadOnlyList<Product>> GetProductAsync(string? brand,string? type,string? sort)
     {
         //return await context.Products.ToListAsync();
+        //AsQueryable allows flexible query building, enabling the application of filters and sorting conditions later.
         var query = context.Products.AsQueryable();
 
+        //Checks if the brand parameter is not null, empty, or whitespace.
         if(!string.IsNullOrWhiteSpace(brand))
+        //filters query to include only products where the Brand property matches the given brand.
           query = query.Where(x => x.Brand==brand);
 
         if(!string.IsNullOrWhiteSpace(type))
           query = query.Where(x => x.Type==type);
 
         query = sort switch
-        {
+        {    
+            //Sorts query by price in ascending order
             "priceAsc" => query.OrderBy(x=>x.price),
+            //Sorts query by price in descending order
             "priceDesc" => query.OrderByDescending(x=>x.price),
+            // If sort is null or any other value, it sorts query by Name in ascending order
             _ => query.OrderBy(x=>x.Name)
 
         };
-
+        //Asynchronously executes the query and returns the results as a list of Product objects. ToListAsync fetches the data from the database, executing the query and returning the filtered, sorted list as an asynchronous result.
         return await query.ToListAsync();
     }
 
