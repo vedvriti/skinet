@@ -13,12 +13,14 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
     {
         //Set the entity as there is only one entity we have created so we can determine it is a product enetity but the compiler cannot detrmine
         //context.Set<T>() returns a set of T entities from the StoreContext.
+        //Set<T> - we are setting the type
         context.Set<T>().Add(entity);
     }
 
     public bool Exists(int id)
     {
         //Queries the database for any T entity where Id matches the id parameter. Any returns true if a match is found, otherwise false.
+        //Set method is used to set the entity based on whatever type it actually is
         return context.Set<T>().Any(x=>x.Id == id);
     }
 

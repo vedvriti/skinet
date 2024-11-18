@@ -2,6 +2,7 @@ using System.Linq;
 using Azure.Core.Pipeline;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,12 @@ namespace API.Controllers
             //Repository Pattern
             //return Ok(await repo.GetProductAsync(brand,type,sort));
             //Generic repository
-            return Ok(await repo.ListAllAsync());
+            //  return Ok(await repo.ListAllAsync());
+            //Creating a new instance of product specification
+            var spec = new ProductSpecification(brand,type,sort);
+            var products = await repo.ListAsync(spec);
+            return Ok(products);
+           
 
         }
 
