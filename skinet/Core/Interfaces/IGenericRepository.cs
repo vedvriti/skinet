@@ -9,6 +9,8 @@ public interface IGenericRepository<T> where T : BaseEntity
     Task<IReadOnlyList<T>> ListAllAsync();
     Task<T?> GetEntityWithSpec(ISpecification<T> spec); //to return individual item
     Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
+    Task<TResult?> GetEntityWithSpec<TResult>(ISpecification<T,TResult> spec); //to return individual item
+    Task<IReadOnlyList<TResult>> ListAsync<TResult>(ISpecification<T,TResult> spec);
     void Add(T entity);
     void Update(T entity);
     void Remove(T entity);

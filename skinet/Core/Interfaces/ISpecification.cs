@@ -10,4 +10,10 @@ public interface ISpecification<T>
   Expression<Func<T, object>>? OrderBy {get;}
   //As we dont know what will be the return type it can either be string, decimal or anything so we made the return type as object
   Expression<Func<T, object>>? OrderByDescending {get;}
+  bool IsDistinct {get;}
+
+}
+public interface ISpecification<T,TResult> : ISpecification<T>
+{
+  Expression<Func<T,TResult>>? select { get;}
 }

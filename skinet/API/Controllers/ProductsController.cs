@@ -161,7 +161,8 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
         {
             //TODO: IMPLEMENT METHOD
-            return Ok();
+            var spec = new BrandListSpecification();
+            return Ok(await repo.ListAsync(spec));
         }
         
         // [HttpGet("Types")]
@@ -173,7 +174,8 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<Strings>>> GetTypes()
         {
             //TODO: IMPLEMENT METHOD
-            return Ok();
+            var spec = new TypeListSpecification();
+            return Ok( await repo.ListAsync(spec));
         }
         //Checking if product exists or not in the database
         private bool productExists(int id)
