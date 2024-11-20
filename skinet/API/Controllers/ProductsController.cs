@@ -1,5 +1,5 @@
 using System.Linq;
-
+using API.RequestHelpers;
 using Azure.Core.Pipeline;
 using Core.Entities;
 using Core.Interfaces;
@@ -49,15 +49,20 @@ namespace API.Controllers
             // var products = await repo.ListAsync(spec);
             // return Ok(products);
 
-            var spec = new ProductSpecification(specParams);
-            var products = await repo.ListAsync(spec);
-            return Ok(products);
+            //Contains the filters before we get the count of number of products
             // var spec = new ProductSpecification(specParams);
             // var products = await repo.ListAsync(spec);
-            // var count = await repo.CountAsync(spec);
+            // return Ok(products);
+            var spec = new ProductSpecification(specParams);
+            var products = await repo.ListAsync(spec);
+            var count = await repo.CountAsync(spec);
 
-            // var pagination = new Pagination<Product>(specParams.PageIndex,specParams.PageSize,count,products);
-            // return Ok(pagination);
+            var pagination = new Pagination<Product>(
+                specParams.PageIndex,
+                specParams.PageSize,
+                count,
+                products);
+            return Ok(pagination);
            
            
 

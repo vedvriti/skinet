@@ -26,6 +26,7 @@ public class ProductSpecParams
     get => _brands; //type = gloves, boards
     set
     {
+         //Pass thr brands that we wish to filter by as a query string but comma separated values, Separting the comma separated value as a list of string using the method split
         _brands = value.SelectMany(x=> x.Split(','
         ,StringSplitOptions.RemoveEmptyEntries)).ToList();
     }
@@ -46,6 +47,14 @@ public class ProductSpecParams
 
       public string? Sort {get;set;}
 
+      private string? _search;
+      public string Search
+      {
+        //The null coalescing operator ?? checks if the left-hand side (_search) is null. If _search is null, it returns the right-hand side value ("" in this case). If _search is not null, it simply returns _search.
+        get => _search ?? "";
+        set => _search = value.ToLower();
+      }
+      
   
 }
 

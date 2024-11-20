@@ -8,6 +8,7 @@ public class SpecificationEvaluator<T> where T :BaseEntity
 {
     public static IQueryable<T> GetQuery(IQueryable<T> query, ISpecification<T> spec)
     {
+        //Without Projection
 
         //Actual query that is going to database
         if (spec.Criteria != null)
@@ -30,14 +31,14 @@ public class SpecificationEvaluator<T> where T :BaseEntity
             query = query.Distinct();
         }
 
-        if(spec.IsPagingEnabled)
+        if(spec.IsPagingEnabled && spec.Skip >= 0 && spec.Take > 0)
         {
             query = query.Skip(spec.Skip).Take(spec.Take);
         }
         return query;
     }
 
-    
+    //With projection
     public static IQueryable<TResult> GetQuery<TSpec, TResult>(IQueryable<T> query, ISpecification<T, TResult> spec)
     {
 
@@ -65,7 +66,7 @@ public class SpecificationEvaluator<T> where T :BaseEntity
         {
             selectQuery = selectQuery?.Distinct();
         }
-        if(spec.IsPagingEnabled)
+        if(spec.IsPagingEnabled && spec.Skip >= 0 && spec.Take > 0)
         {
             selectQuery = selectQuery?.Skip(spec.Skip).Take(spec.Take);
         }
