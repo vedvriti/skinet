@@ -11,6 +11,10 @@ public interface ISpecification<T>
   //As we dont know what will be the return type it can either be string, decimal or anything so we made the return type as object
   Expression<Func<T, object>>? OrderByDescending {get;}
   bool IsDistinct {get;}
+  int Take{get;}
+  int Skip{get;}
+  bool IsPagingEnabled{get;}
+  //IQueryable<T> ApplyCriteria(IQueryable<T> query);
 
 }
 public interface ISpecification<T,TResult> : ISpecification<T>

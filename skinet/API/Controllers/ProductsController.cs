@@ -1,4 +1,5 @@
 using System.Linq;
+
 using Azure.Core.Pipeline;
 using Core.Entities;
 using Core.Interfaces;
@@ -31,18 +32,33 @@ namespace API.Controllers
         //3.Returning a type of list IEnumerable of type product from this requset a list of products
 
         //This method is responsible to get the list of products - inorder to get them from the databse we need to inject the store context in our controller
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string? brand,string? type,string? sort)
-        {
+        // public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string? brand,string? type,string? sort)
+            public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts([FromQuery]ProductSpecParams specParams)
+            //When we are pssing object in the parameter we need to specify [FromQuery]
+             {
             //Controller
             //return await context.Products.ToListAsync();
             //Repository Pattern
             //return Ok(await repo.GetProductAsync(brand,type,sort));
             //Generic repository
             //  return Ok(await repo.ListAllAsync());
+
+            //Using Specification Pattern
             //Creating a new instance of product specification
-            var spec = new ProductSpecification(brand,type,sort);
+            // var spec = new ProductSpecification(brand,type,sort);
+            // var products = await repo.ListAsync(spec);
+            // return Ok(products);
+
+            var spec = new ProductSpecification(specParams);
             var products = await repo.ListAsync(spec);
             return Ok(products);
+            // var spec = new ProductSpecification(specParams);
+            // var products = await repo.ListAsync(spec);
+            // var count = await repo.CountAsync(spec);
+
+            // var pagination = new Pagination<Product>(specParams.PageIndex,specParams.PageSize,count,products);
+            // return Ok(pagination);
+           
            
 
         }
