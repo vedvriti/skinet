@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$customTheme: mat.define-theme();
+
+@include mat.core();
+
+.custom-theme{
+    @include mat.all-component-themes($customTheme);
+
+    //ovveride the button styles
+    .mdc-button, .mdc-raised-button, .mdc-stroked-buuton, .mdc-flat-button{
+       @apply rounded-md 
+    }
+}
