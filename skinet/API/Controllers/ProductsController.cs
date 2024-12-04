@@ -26,7 +26,7 @@ namespace API.Controllers
                   //     {
                   //         this.context = context;
                   //     }
-        [HttpGet]
+            [HttpGet]
         //1.Returning an asynchronous response
         //2.Action Result allow us to return HTTP type of responses
         //3.Returning a type of list IEnumerable of type product from this requset a list of products
@@ -64,8 +64,6 @@ namespace API.Controllers
                 products);
             return Ok(pagination);
            
-           
-
         }
 
         [HttpGet("{id:int}")] //api/products/2
@@ -178,7 +176,7 @@ namespace API.Controllers
         //     return Ok(await repo.GetBrandAsync());
         // }
         
-         [HttpGet("brands")]
+        [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
         {
             //TODO: IMPLEMENT METHOD
@@ -191,7 +189,7 @@ namespace API.Controllers
         // {
         //     return Ok(await repo.GetTypesAsync());
         // }
-         [HttpGet("Types")]
+        [HttpGet("Types")]
         public async Task<ActionResult<IReadOnlyList<Strings>>> GetTypes()
         {
             //TODO: IMPLEMENT METHOD

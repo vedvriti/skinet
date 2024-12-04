@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "client": {
+    "Client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -32,11 +32,8 @@
               }
             ],
             "styles": [
-               "src/styles.scss",
-                "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-],
-
-          
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -67,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "client:build:production"
+              "buildTarget": "Client:build:production"
             },
             "development": {
-              "buildTarget": "client:build:development"
+              "buildTarget": "Client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,8 +91,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -104,6 +100,6 @@
     }
   },
   "cli": {
-    "analytics": "8e70eb9d-df2a-4b77-a754-09ad07058004"
+    "analytics": "349b8c17-769f-48cb-8cae-c62cd0083ad1"
   }
 }
