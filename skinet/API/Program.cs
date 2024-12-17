@@ -23,7 +23,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:52164","https://localhost:52164"));
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:65050","https://localhost:65050"));
 app.MapControllers();
 
 //Seeding data to perform migration creating the database in sql server by using the json data
